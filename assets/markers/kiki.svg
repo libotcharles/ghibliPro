@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Kiki with broomstick silhouette -->
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Body/Dress -->
+  <path d="M 22 30 L 20 50 L 44 50 L 42 30 Z" fill="#1a1a1a" filter="url(#shadow)"/>
+  
+  <!-- Head -->
+  <circle cx="32" cy="14" r="11" fill="#1a1a1a"/>
+  
+  <!-- Hair ponytail -->
+  <ellipse cx="42" cy="16" rx="5" ry="8" fill="#1a1a1a"/>
+  
+  <!-- Face -->
+  <circle cx="28" cy="12" r="2" fill="white"/>
+  <circle cx="36" cy="12" r="2" fill="white"/>
+  
+  <!-- Eyes pupils -->
+  <circle cx="28.5" cy="12" r="1" fill="#1a1a1a"/>
+  <circle cx="36.5" cy="12" r="1" fill="#1a1a1a"/>
+  
+  <!-- Smile -->
+  <path d="M 30 17 Q 32 19 34 17" stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Broomstick -->
+  <line x1="50" y1="10" x2="55" y2="45" stroke="#6b4423" stroke-width="2"/>
+  
+  <!-- Broom bristles -->
+  <g stroke="#8b6f47" stroke-width="1.5">
+    <line x1="54" y1="42" x2="52" y2="48"/>
+    <line x1="55" y1="45" x2="54" y2="51"/>
+    <line x1="56" y1="43" x2="57" y2="49"/>
+  </g>
+</svg>

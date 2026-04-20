@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Ponyo goldfish silhouette -->
+  <defs>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Body -->
+  <ellipse cx="32" cy="32" rx="18" ry="14" fill="#d4764a" filter="url(#shadow)"/>
+  
+  <!-- Head -->
+  <circle cx="18" cy="28" r="10" fill="#d4764a"/>
+  
+  <!-- Eye -->
+  <circle cx="14" cy="26" r="3" fill="white"/>
+  <circle cx="15" cy="26" r="1.5" fill="#2c3e50"/>
+  
+  <!-- Mouth -->
+  <path d="M 16 30 Q 18 32 20 30" stroke="#2c3e50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Top fin -->
+  <polygon points="30,16 28,8 34,10" fill="#d4764a"/>
+  
+  <!-- Bottom fin -->
+  <polygon points="30,48 28,56 34,54" fill="#d4764a"/>
+  
+  <!-- Tail -->
+  <polygon points="48,32 60,25 60,39" fill="#d4764a"/>
+  
+  <!-- Tail accent -->
+  <polygon points="50,32 58,28 58,36" fill="#e8a884" opacity="0.6"/>
+</svg>

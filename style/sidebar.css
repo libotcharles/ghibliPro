@@ -1,0 +1,240 @@
+/* 📚 STILI SIDEBAR FILM GHIBLI */
+
+.sidebar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 350px;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(245, 241, 230, 0.98), rgba(107, 142, 127, 0.95));
+    backdrop-filter: blur(10px);
+    border-left: 3px solid #6b8e7f;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.5s ease;
+    overflow: hidden;
+}
+
+/* Header sidebar */
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 2px solid #6b8e7f;
+    background: rgba(107, 142, 127, 0.5);
+}
+
+.sidebar-header h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: #1a3a3f;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Search container */
+.search-container {
+    padding: 15px;
+    position: relative;
+    border-bottom: 1px solid rgba(107, 142, 127, 0.3);
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 35px 12px 15px;
+    font-family: 'Quicksand', sans-serif;
+    border: 2px solid #6b8e7f;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a3a3f;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #1a3a3f;
+    background: white;
+    box-shadow: 0 2px 8px rgba(107, 142, 127, 0.3);
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-container i {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b8e7f;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+/* Lista film */
+.film-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* Elemento film singolo */
+.film-item {
+    padding: 15px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    border-left: 4px solid #6b8e7f;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.film-item:hover {
+    background: white;
+    transform: translateX(-8px);
+    border-left-color: #1a3a3f;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.film-item h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    color: #1a3a3f;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.film-item p {
+    margin: 6px 0;
+    font-size: 0.85rem;
+    color: #3d6b5f;
+    line-height: 1.4;
+}
+
+.film-item .director {
+    font-weight: 600;
+    color: #6b8e7f;
+}
+
+.film-item .year {
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.film-item .rating {
+    color: #d4a574;
+    font-weight: 600;
+}
+
+.film-item .description {
+    color: #555;
+    font-style: italic;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+    margin-top: 8px;
+}
+
+/* Animazioni sidebar */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Scrollbar personalizzata */
+.film-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.film-list::-webkit-scrollbar-track {
+    background: rgba(107, 142, 127, 0.1);
+    border-radius: 10px;
+}
+
+.film-list::-webkit-scrollbar-thumb {
+    background: #6b8e7f;
+    border-radius: 10px;
+}
+
+.film-list::-webkit-scrollbar-thumb:hover {
+    background: #1a3a3f;
+}
+
+/* Firefox scrollbar */
+.film-list {
+    scrollbar-color: #6b8e7f rgba(107, 142, 127, 0.1);
+    scrollbar-width: thin;
+}
+
+/* Empty state */
+.film-list:empty::after {
+    content: "📚 Nessun film trovato";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: #999;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+    .sidebar {
+        width: 280px;
+    }
+
+    .sidebar-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .film-item h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: 50%;
+        bottom: 0;
+        right: 0;
+        top: auto;
+        border-left: none;
+        border-top: 3px solid #6b8e7f;
+        animation: slideInUp 0.5s ease;
+    }
+
+    @keyframes slideInUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .film-list {
+        max-height: 300px;
+    }
+}

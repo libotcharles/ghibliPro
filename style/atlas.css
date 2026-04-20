@@ -1,0 +1,132 @@
+
+.atlas-detail-panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    width: 400px;
+    height: 100%;
+
+    background: rgba(245, 241, 230, 0.98);
+
+    box-shadow: -10px 0 30px rgba(0,0,0,0.25);
+
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+
+    overflow-y: auto;
+    z-index: 2500;
+    pointer-events: none;
+}
+
+.atlas-detail-panel.open {
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.close-panel {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    background: white;
+
+    border: 2px solid #6b8e7f;
+
+    cursor: pointer;
+    z-index: 4000;
+}
+
+/* 🧭 BOTTONE RANDOM JOURNEY */
+.compass-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #6b8e7f;
+
+    font-size: 28px;
+    cursor: pointer;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.compass-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 6px 20px rgba(107, 142, 127, 0.4);
+    background: #f5f1e6;
+}
+
+.compass-btn:active {
+    transform: scale(0.95);
+}
+
+/* 🖼️ IMMAGINE PANNELLO */
+.panel-hero-img {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 3px solid #6b8e7f;
+    margin-bottom: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+/* 📝 CONTENUTO PANNELLO */
+.panel-content {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.panel-content h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: #1a3a3f;
+    margin-bottom: 15px;
+}
+
+.panel-content h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #6b8e7f;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.panel-content p {
+    font-family: 'Quicksand', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.panel-content hr {
+    border: 1px solid #d4a574;
+    margin: 15px 0;
+}
+
+/* ✨ ANIMAZIONE FADE */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

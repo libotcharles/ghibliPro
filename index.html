@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghibli World Atlas</title>
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Animazioni -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/map.css">
+    <link rel="stylesheet" href="style/atlas.css">
+    <link rel="stylesheet" href="style/sidebar.css">
+
+</head>
+
+<body>
+
+<!-- 🌿 LANDING -->
+<section id="landing-page" class="animate__animated">
+
+    <div class="landing-content animate__animated animate__fadeIn">
+        <h1>Ghibli World Atlas</h1>
+        <p>Un viaggio tra i luoghi reali della magia</p>
+
+        <button id="start-btn" class="btn-figo">
+            Inizia a esplorare
+        </button>
+    </div>
+
+</section>
+
+<!-- 🌍 ATLAS -->
+<section id="atlas-page" class="hidden">
+
+    <!-- 🗺️ MAPPA -->
+    <div id="atlas-map"></div>
+
+    <!-- 🔍 SEARCH -->
+    <div class="atlas-search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Cerca film o regista...">
+    </div>
+
+    <!-- 🧭 RANDOM -->
+    <button class="compass-btn" id="compass-btn">
+        🧭
+    </button>
+
+    <!-- 📂 PANEL DETTAGLIO -->
+    <div class="atlas-detail-panel" id="detail-panel">
+
+        <!-- ❌ CLOSE BUTTON (FIX DEFINITIVO) -->
+        <button id="close-panel" class="close-panel">×</button>
+
+        <!-- IMAGE -->
+        <div id="panel-hero-img" class="panel-hero-img"></div>
+
+        <!-- CONTENT -->
+        <div class="panel-content">
+
+            <h2 id="panel-title">Titolo</h2>
+
+            <p><strong>📅</strong> <span id="panel-year"></span></p>
+            <p><strong>🎬</strong> <span id="panel-director"></span></p>
+            <p><strong>📍</strong> <span id="panel-location"></span></p>
+
+            <hr>
+
+            <h3>✨ Ispirazione</h3>
+            <p id="panel-inspiration"></p>
+
+            <hr>
+
+            <h3>⭐ Rating</h3>
+            <p id="panel-rating"></p>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- JS -->
+<script src="js/map-config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ui.js"></script>
+
+<!-- 🚀 START TRANSITION -->
+<script>
+document.getElementById('start-btn').addEventListener('click', () => {
+
+    const landing = document.getElementById('landing-page');
+    const atlas = document.getElementById('atlas-page');
+
+    landing.classList.add('animate__fadeOut');
+
+    setTimeout(() => {
+
+        landing.classList.add('hidden');
+        atlas.classList.remove('hidden');
+        atlas.classList.add('animate__fadeIn');
+
+        if (!window.map) {
+            window.map = initMap();
+        }
+
+        setTimeout(() => {
+            window.map.invalidateSize();
+
+            if (typeof loadMarkersOnMap === "function") {
+                loadMarkersOnMap();
+            }
+
+        }, 300);
+
+    }, 800);
+});
+</script>
+
+</body>
+</html>
