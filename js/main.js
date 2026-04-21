@@ -3,34 +3,22 @@ window.activeMarkers = [];
 /* =========================
    🎯 CREA ICONA MARKER CON EMOJI
 ========================= */
-function createMarkerIcon(markerEmoji) {
-    // Creiamo un'icona HTML con l'emoji
-    const html = `
-        <div style="
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 45px;
-            height: 45px;
-            background: #6b8e7f;
-            border: 3px solid white;
-            border-radius: 50%;
-            font-size: 28px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        ">
-            ${markerEmoji}
-        </div>
-    `;
-
+function createMarkerIcon(markerEmoji = '🎬') {
     return L.divIcon({
-        html: html,
+        html: `
+            <div class="marker-content" aria-hidden="true">
+                <span class="marker-emoji">${markerEmoji}</span>
+            </div>
+        `,
         iconSize: [45, 45],
-        iconAnchor: [22, 45],
-        popupAnchor: [0, -45],
+        iconAnchor: [22, 22],
+        popupAnchor: [0, -22],
         className: 'ghibli-marker'
     });
+}
+
+function getMarkerContentElement(marker) {
+    return marker?._icon?.querySelector('.marker-content') || null;
 }
 
 /* =========================
@@ -39,8 +27,10 @@ function createMarkerIcon(markerEmoji) {
 function clearMarkers() {
     if (!window.map) return;
 
-    window.activeMarkers.forEach(marker => {
-        window.map.removeLayer(marker);
+    window.activeMarkers.forEach((marker) => {
+        if (window.map.hasLayer(marker)) {
+            window.map.removeLayer(marker);
+        }
     });
 
     window.activeMarkers = [];
@@ -50,30 +40,33 @@ function clearMarkers() {
    🗺️ CARICA MARKER
 ========================= */
 function loadMarkers(films) {
-    if (!window.map || !films || !Array.isArray(films)) return;
+    if (!window.map || !Array.isArray(films)) return;
 
     clearMarkers();
 
     films.forEach((film) => {
-        const marker = L.marker([film.lat, film.lng], {
-            icon: createMarkerIcon(film.marker || '🎬')
-        })
-        .addTo(window.map);
+        if (typeof film.lat !== 'number' || typeof film.lng !== 'number') return;
 
-        // 🎬 CLICK PER APRIRE PANNELLO
+        const marker = L.marker([film.lat, film.lng], {
+            icon: createMarkerIcon(film.marker),
+            riseOnHover: true,
+            keyboard: false
+        }).addTo(window.map);
+
         marker.on('click', (e) => {
-            e.originalEvent.stopPropagation();
-            
-            // Animazione zoom fluida
-            const iconElement = marker._icon;
+            e.originalEvent?.stopPropagation?.();
+
+            const iconElement = getMarkerContentElement(marker);
             if (iconElement) {
+                iconElement.classList.remove('clicked');
+                void iconElement.offsetWidth;
                 iconElement.classList.add('clicked');
+
                 setTimeout(() => {
                     iconElement.classList.remove('clicked');
-                }, 800);
+                }, 420);
             }
 
-            // Apri pannello
             if (window.UI && typeof window.UI.openPanel === 'function') {
                 window.UI.openPanel(film);
             }
@@ -82,5 +75,5 @@ function loadMarkers(films) {
         window.activeMarkers.push(marker);
     });
 
-    console.log("📍 Marker caricati:", films.length);
+    console.log('📍 Marker caricati:', window.activeMarkers.length);
 }

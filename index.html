@@ -61,7 +61,7 @@
     <!-- 📂 PANEL DETTAGLIO -->
     <div class="atlas-detail-panel" id="detail-panel">
 
-        <!-- ❌ CLOSE BUTTON (FIX DEFINITIVO) -->
+        <!-- ❌ CLOSE BUTTON -->
         <button id="close-panel" class="close-panel">×</button>
 
         <!-- IMAGE -->
@@ -99,38 +99,6 @@
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 <script src="js/ui.js"></script>
-
-<!-- 🚀 START TRANSITION -->
-<script>
-document.getElementById('start-btn').addEventListener('click', () => {
-
-    const landing = document.getElementById('landing-page');
-    const atlas = document.getElementById('atlas-page');
-
-    landing.classList.add('animate__fadeOut');
-
-    setTimeout(() => {
-
-        landing.classList.add('hidden');
-        atlas.classList.remove('hidden');
-        atlas.classList.add('animate__fadeIn');
-
-        if (!window.map) {
-            window.map = initMap();
-        }
-
-        setTimeout(() => {
-            window.map.invalidateSize();
-
-            if (typeof loadMarkersOnMap === "function") {
-                loadMarkersOnMap();
-            }
-
-        }, 300);
-
-    }, 800);
-});
-</script>
 
 </body>
 </html>
