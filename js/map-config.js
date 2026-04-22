@@ -1,6 +1,5 @@
 window.map = null;
-window.baseLayers = {};
-window.currentBaseLayerKey = 'light';
+window.baseLayer = null;
 
 /* =========================
    🗺️ CREA MAPPA DINAMICA
@@ -30,36 +29,16 @@ function initMap() {
         preferCanvas: true
     });
 
-    window.baseLayers = {
-        light: L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap © CARTO',
-            subdomains: 'abcd',
-            noWrap: true,
-            updateWhenZooming: false,
-            updateWhenIdle: true,
-            keepBuffer: 5
-        }),
+    window.baseLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap © CARTO',
+        subdomains: 'abcd',
+        noWrap: true,
+        updateWhenZooming: false,
+        updateWhenIdle: true,
+        keepBuffer: 5
+    });
 
-        voyager: L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap © CARTO',
-            subdomains: 'abcd',
-            noWrap: true,
-            updateWhenZooming: false,
-            updateWhenIdle: true,
-            keepBuffer: 5
-        }),
-
-        dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap © CARTO',
-            subdomains: 'abcd',
-            noWrap: true,
-            updateWhenZooming: false,
-            updateWhenIdle: true,
-            keepBuffer: 5
-        })
-    };
-
-    window.baseLayers[window.currentBaseLayerKey].addTo(window.map);
+    window.baseLayer.addTo(window.map);
 
     window.map.on('zoomstart movestart', () => {
         document.body.classList.add('map-is-busy');
@@ -76,23 +55,4 @@ function initMap() {
     });
 
     return window.map;
-}
-
-/* =========================
-   🎨 CAMBIA STILE MAPPA
-========================= */
-function cycleMapStyle() {
-    if (!window.map || !window.baseLayers) return;
-
-    const order = ['light', 'voyager', 'dark'];
-    const currentIndex = order.indexOf(window.currentBaseLayerKey);
-    const nextIndex = (currentIndex + 1) % order.length;
-    const nextKey = order[nextIndex];
-
-    if (window.baseLayers[window.currentBaseLayerKey]) {
-        window.map.removeLayer(window.baseLayers[window.currentBaseLayerKey]);
-    }
-
-    window.currentBaseLayerKey = nextKey;
-    window.baseLayers[nextKey].addTo(window.map);
 }

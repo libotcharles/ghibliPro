@@ -122,7 +122,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start-btn')?.addEventListener('click', startAtlas);
     document.getElementById('close-panel')?.addEventListener('click', closePanel);
     document.getElementById('compass-btn')?.addEventListener('click', randomJourney);
-    document.getElementById('fit-all-btn')?.addEventListener('click', () => fitMapToMarkers());
-    document.getElementById('toggle-style-btn')?.addEventListener('click', cycleMapStyle);
     document.getElementById('search-input')?.addEventListener('input', handleSearch);
 });
