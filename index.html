@@ -77,7 +77,7 @@
             </button>
         </div>
 
-        <!-- 📂 PANEL DETTAGLIO -->
+        <!-- 📂 PANEL DETTAGLIO VECCHIO -->
         <div class="atlas-detail-panel" id="detail-panel">
             <button id="close-panel" class="close-panel">×</button>
 
@@ -99,6 +99,49 @@
 
                 <h3>⭐ MC</h3>
                 <p id="panel-rating"></p>
+            </div>
+        </div>
+
+        <!-- 🎬 NUOVO OVERLAY FILM -->
+        <div id="film-overlay" class="film-overlay hidden">
+            <div class="film-overlay-backdrop"></div>
+
+            <button id="film-overlay-close" class="film-overlay-close">×</button>
+
+            <div class="film-overlay-layout">
+                <div class="film-side-card film-left-card">
+                    <div id="overlay-left-img" class="overlay-img-box"></div>
+                </div>
+
+                <div class="film-center-area">
+                    <div id="overlay-main-img" class="film-main-card"></div>
+
+                    <div class="film-title-area">
+                        <h1 id="overlay-title">Titolo del film</h1>
+
+                        <div class="film-divider">
+                            <span></span>
+                            <i class="fas fa-leaf"></i>
+                            <span></span>
+                        </div>
+
+                        <div class="film-meta-row">
+                            <p><i class="fas fa-calendar"></i> <span id="overlay-year">Anno</span></p>
+                            <p><i class="fas fa-clock"></i> <span id="overlay-duration">Durata</span></p>
+                            <p><i class="fas fa-chair"></i> <span id="overlay-director">Regia</span></p>
+                            <p><i class="fas fa-star"></i> <span id="overlay-rating">Voto</span></p>
+                        </div>
+
+                        <button id="overlay-more-btn" class="overlay-more-btn">
+                            <i class="fas fa-circle-info"></i>
+                            SCOPRI DI PIÙ
+                        </button>
+                    </div>
+                </div>
+
+                <div class="film-side-card film-right-card">
+                    <div id="overlay-right-img" class="overlay-img-box"></div>
+                </div>
             </div>
         </div>
     </section>

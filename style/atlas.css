@@ -1,4 +1,3 @@
-
 .atlas-detail-panel {
     position: absolute;
     right: 0;
@@ -128,5 +127,219 @@
     }
     to {
         opacity: 1;
+    }
+}
+
+/* =========================
+   🎬 NUOVO OVERLAY FILM
+========================= */
+
+.film-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3000;
+    overflow: hidden;
+}
+
+.film-overlay.hidden {
+    display: none;
+}
+
+.film-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(22, 34, 38, 0.58);
+    backdrop-filter: blur(4px);
+}
+
+.film-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 8px;
+    background: rgba(120, 160, 150, 0.12);
+    pointer-events: none;
+}
+
+.film-overlay-close {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    z-index: 5;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: rgba(255, 250, 235, 0.95);
+    color: #3f5149;
+
+    font-size: 34px;
+    line-height: 42px;
+    cursor: pointer;
+
+    box-shadow: 0 5px 14px rgba(0,0,0,0.2);
+}
+
+.film-overlay-layout {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* pannelli base */
+.film-side-card,
+.film-main-card {
+    background: linear-gradient(145deg, #fff8e9, #f3e5c8);
+    border-radius: 12px;
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.28),
+        inset 0 0 35px rgba(255, 255, 255, 0.45);
+    overflow: hidden;
+}
+
+/* rettangolo sinistro attaccato al lato */
+.film-left-card {
+    position: absolute;
+    left: 0;
+    top: 21%;
+
+    width: 23vw;
+    height: 65vh;
+
+    animation: slideFromLeft 0.55s ease forwards;
+}
+
+/* rettangolo destro attaccato al lato */
+.film-right-card {
+    position: absolute;
+    right: 0;
+    top: 21%;
+
+    width: 23vw;
+    height: 65vh;
+
+    animation: slideFromRight 0.55s ease forwards;
+}
+
+/* rettangolo centrale in alto */
+.film-center-area {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    width: 52vw;
+    height: 50vh;
+
+    transform: translateX(-50%);
+    animation: slideFromTop 0.6s ease forwards;
+}
+
+.film-main-card {
+    width: 100%;
+    height: 100%;
+}
+
+/* immagine solo nel rettangolo sopra */
+.film-main-card {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.overlay-img-box {
+    width: 100%;
+    height: 100%;
+    background-image: none;
+}
+
+/* titolo sotto il rettangolo centrale */
+.film-title-area {
+    position: absolute;
+    left: 50%;
+    bottom: -165px;
+
+    width: 100%;
+
+    transform: translateX(-50%);
+    text-align: center;
+    color: #111;
+}
+
+.film-title-area h1 {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+
+    margin: 0;
+
+    color: #111;
+    text-shadow: none;
+}
+
+/* nasconde info extra */
+.film-divider,
+.film-meta-row,
+.overlay-more-btn {
+    display: none;
+}
+
+/* animazioni pannelli */
+@keyframes slideFromTop {
+    from {
+        transform: translate(-50%, -110%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-110%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    from {
+        transform: translateX(110%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* responsive */
+@media screen and (max-width: 900px) {
+    .film-left-card,
+    .film-right-card {
+        display: none;
+    }
+
+    .film-center-area {
+        top: 40px;
+        width: 86vw;
+        height: 42vh;
+    }
+
+    .film-title-area {
+        bottom: -120px;
+    }
+
+    .film-title-area h1 {
+        font-size: 1.8rem;
     }
 }

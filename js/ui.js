@@ -1,31 +1,55 @@
 window.UI = {};
 
 /* =========================
-   📂 OPEN PANEL
+   🎬 OPEN OVERLAY FILM
 ========================= */
 window.UI.openPanel = function (film) {
-    const panel = document.getElementById('detail-panel');
-    if (!panel || !film) return;
+    const overlay = document.getElementById('film-overlay');
+    if (!overlay || !film) return;
 
-    panel.classList.add('open');
+    overlay.classList.remove('hidden');
 
-    document.getElementById('panel-title').textContent = film.title || 'Titolo';
-    document.getElementById('panel-year').textContent = film.year || '-';
-    document.getElementById('panel-director').textContent = film.director || '-';
-    document.getElementById('panel-location').textContent = film.location || '-';
-    document.getElementById('panel-inspiration').textContent = film.inspiration || '-';
-    document.getElementById('panel-rating').textContent = film.character || 'Personaggio sconosciuto';
+    document.getElementById('overlay-title').textContent = film.title || 'Titolo del film';
+    document.getElementById('overlay-year').textContent = film.year || '-';
+    document.getElementById('overlay-director').textContent = film.director || '-';
+    document.getElementById('overlay-rating').textContent = film.character || '-';
 
-    const img = document.getElementById('panel-hero-img');
-    if (img) {
-        img.style.backgroundImage = film.filmImage ? `url(${film.filmImage})` : 'none';
+    const duration = document.getElementById('overlay-duration');
+    if (duration) {
+        duration.textContent = film.duration || '-';
+    }
+
+    const mainImg = document.getElementById('overlay-main-img');
+    const leftImg = document.getElementById('overlay-left-img');
+    const rightImg = document.getElementById('overlay-right-img');
+
+    const imageUrl = film.filmImage || '';
+
+    /* immagine SOLO nel rettangolo sopra */
+    if (mainImg) {
+        mainImg.style.backgroundImage = imageUrl ? `url(${imageUrl})` : 'none';
+        mainImg.style.backgroundSize = 'cover';
+        mainImg.style.backgroundPosition = 'center';
+        mainImg.style.backgroundRepeat = 'no-repeat';
+    }
+
+    /* rettangoli laterali vuoti */
+    if (leftImg) {
+        leftImg.style.backgroundImage = 'none';
+    }
+
+    if (rightImg) {
+        rightImg.style.backgroundImage = 'none';
     }
 };
 
 /* =========================
-   ❌ CLOSE PANEL
+   ❌ CLOSE OVERLAY
 ========================= */
 function closePanel() {
+    document.getElementById('film-overlay')?.classList.add('hidden');
+
+    /* chiude anche il vecchio pannello, nel caso fosse aperto */
     document.getElementById('detail-panel')?.classList.remove('open');
 }
 
@@ -120,7 +144,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('start-btn')?.addEventListener('click', startAtlas);
+    document.getElementById('film-overlay-close')?.addEventListener('click', closePanel);
     document.getElementById('close-panel')?.addEventListener('click', closePanel);
     document.getElementById('compass-btn')?.addEventListener('click', randomJourney);
     document.getElementById('search-input')?.addEventListener('input', handleSearch);
+
+    document.getElementById('film-overlay')?.addEventListener('click', (event) => {
+        if (
+            event.target.id === 'film-overlay' ||
+            event.target.classList.contains('film-overlay-backdrop')
+        ) {
+            closePanel();
+        }
+    });
 });
