@@ -7,6 +7,10 @@
     background: #dcdcdc;
 }
 
+#atlas-map .leaflet-tile {
+    filter: saturate(1.35) brightness(1.06) contrast(1.03) hue-rotate(-6deg);
+}
+
 /* =========================
    🎛️ TOOL BUTTONS
 ========================= */

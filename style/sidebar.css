@@ -6,12 +6,12 @@
     top: 0;
     width: 350px;
     height: 100vh;
-    background: linear-gradient(180deg, rgba(245, 241, 230, 0.98), rgba(107, 142, 127, 0.95));
+    background: linear-gradient(180deg, rgba(250, 247, 242, 0.98), rgba(181, 206, 193, 0.85));
     backdrop-filter: blur(10px);
-    border-left: 3px solid #6b8e7f;
+    border-left: 3px solid #9db8a8;
     display: flex;
     flex-direction: column;
-    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.15);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.12);
     animation: slideInRight 0.5s ease;
     overflow: hidden;
 }
@@ -19,46 +19,46 @@
 /* Header sidebar */
 .sidebar-header {
     padding: 20px;
-    border-bottom: 2px solid #6b8e7f;
-    background: rgba(107, 142, 127, 0.5);
+    border-bottom: 2px solid #9db8a8;
+    background: rgba(157, 184, 168, 0.4);
 }
 
 .sidebar-header h2 {
     font-family: 'Caveat', cursive;
     font-size: 2rem;
-    color: #1a3a3f;
+    color: #5a7a6f;
     margin: 0;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 /* Search container */
 .search-container {
     padding: 15px;
     position: relative;
-    border-bottom: 1px solid rgba(107, 142, 127, 0.3);
+    border-bottom: 1px solid rgba(157, 184, 168, 0.2);
 }
 
 .search-input {
     width: 100%;
     padding: 12px 35px 12px 15px;
     font-family: 'Quicksand', sans-serif;
-    border: 2px solid #6b8e7f;
+    border: 2px solid #9db8a8;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    color: #1a3a3f;
+    background: rgba(255, 250, 245, 0.9);
+    color: #5a7a6f;
     font-size: 0.95rem;
     transition: all 0.3s ease;
 }
 
 .search-input:focus {
     outline: none;
-    border-color: #1a3a3f;
-    background: white;
-    box-shadow: 0 2px 8px rgba(107, 142, 127, 0.3);
+    border-color: #5a7a6f;
+    background: rgba(255, 250, 245, 0.98);
+    box-shadow: 0 2px 8px rgba(157, 184, 168, 0.2);
 }
 
 .search-input::placeholder {
-    color: #999;
+    color: #aaa;
 }
 
 .search-container i {
@@ -66,7 +66,7 @@
     right: 25px;
     top: 50%;
     transform: translateY(-50%);
-    color: #6b8e7f;
+    color: #9db8a8;
     font-size: 1.1rem;
     pointer-events: none;
 }
@@ -82,26 +82,26 @@
 .film-item {
     padding: 15px;
     margin-bottom: 12px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 250, 245, 0.85);
     border-radius: 15px;
-    border-left: 4px solid #6b8e7f;
+    border-left: 4px solid #9db8a8;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     backdrop-filter: blur(5px);
 }
 
 .film-item:hover {
-    background: white;
+    background: rgba(255, 250, 245, 0.95);
     transform: translateX(-8px);
-    border-left-color: #1a3a3f;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-left-color: #5a7a6f;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .film-item h3 {
     font-family: 'Caveat', cursive;
     font-size: 1.3rem;
-    color: #1a3a3f;
+    color: #5a7a6f;
     margin: 0 0 8px 0;
     line-height: 1.2;
 }
@@ -109,29 +109,29 @@
 .film-item p {
     margin: 6px 0;
     font-size: 0.85rem;
-    color: #3d6b5f;
+    color: #6b8e7f;
     line-height: 1.4;
 }
 
 .film-item .director {
     font-weight: 600;
-    color: #6b8e7f;
+    color: #5a7a6f;
 }
 
 .film-item .year {
-    color: #999;
+    color: #a8bfb5;
     font-size: 0.8rem;
 }
 
 .film-item .rating {
-    color: #d4a574;
+    color: #d4bfab;
     font-weight: 600;
 }
 
 .film-item .description {
-    color: #555;
+    color: #6b8e7f;
     font-style: italic;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #d9e8e2;
     padding-top: 8px;
     margin-top: 8px;
 }
@@ -165,22 +165,22 @@
 }
 
 .film-list::-webkit-scrollbar-track {
-    background: rgba(107, 142, 127, 0.1);
+    background: rgba(157, 184, 168, 0.08);
     border-radius: 10px;
 }
 
 .film-list::-webkit-scrollbar-thumb {
-    background: #6b8e7f;
+    background: #9db8a8;
     border-radius: 10px;
 }
 
 .film-list::-webkit-scrollbar-thumb:hover {
-    background: #1a3a3f;
+    background: #5a7a6f;
 }
 
 /* Firefox scrollbar */
 .film-list {
-    scrollbar-color: #6b8e7f rgba(107, 142, 127, 0.1);
+    scrollbar-color: #9db8a8 rgba(157, 184, 168, 0.08);
     scrollbar-width: thin;
 }
 
@@ -191,7 +191,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: #999;
+    color: #a8bfb5;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.1rem;
 }
