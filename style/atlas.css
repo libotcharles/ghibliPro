@@ -194,12 +194,15 @@
 /* pannelli base */
 .film-side-card,
 .film-main-card {
-    background: linear-gradient(145deg, #fff8e9, #f3e5c8);
-    border-radius: 12px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-color: #0f1a1c;
+
     box-shadow:
-        0 12px 25px rgba(0, 0, 0, 0.28),
-        inset 0 0 35px rgba(255, 255, 255, 0.45);
-    overflow: hidden;
+        inset 0 0 80px rgba(0,0,0,0.7),
+        0 10px 30px rgba(0,0,0,0.4);
 }
 
 /* rettangolo sinistro attaccato al lato */
