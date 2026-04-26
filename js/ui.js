@@ -22,10 +22,11 @@ window.UI.openPanel = function (film) {
     const mainImg = document.getElementById('overlay-main-img');
     const leftImg = document.getElementById('overlay-left-img');
     const rightImg = document.getElementById('overlay-right-img');
+    const previewImg = document.getElementById('preview-img');
+    const previewOverlay = document.getElementById('image-preview-overlay');
 
     const imageUrl = film.filmImage || '';
 
-    /* immagine SOLO nel rettangolo sopra */
     if (mainImg) {
         mainImg.style.backgroundImage = imageUrl ? `url(${imageUrl})` : 'none';
         mainImg.style.backgroundSize = 'cover';
@@ -33,7 +34,14 @@ window.UI.openPanel = function (film) {
         mainImg.style.backgroundRepeat = 'no-repeat';
     }
 
-    /* rettangoli laterali vuoti */
+    if (previewImg) {
+        previewImg.src = imageUrl || '';
+    }
+
+    if (previewOverlay) {
+        previewOverlay.classList.add('hidden');
+    }
+
     if (leftImg) {
         leftImg.style.backgroundImage = 'none';
     }
@@ -44,12 +52,35 @@ window.UI.openPanel = function (film) {
 };
 
 /* =========================
+   🖼️ OPEN IMAGE PREVIEW
+========================= */
+function openImagePreview(event) {
+    event.stopPropagation();
+
+    const previewOverlay = document.getElementById('image-preview-overlay');
+    if (!previewOverlay) return;
+
+    previewOverlay.classList.remove('hidden');
+}
+
+/* =========================
+   🖼️ CLOSE IMAGE PREVIEW
+========================= */
+function closeImagePreview(event) {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    document.getElementById('image-preview-overlay')?.classList.add('hidden');
+}
+
+/* =========================
    ❌ CLOSE OVERLAY
 ========================= */
 function closePanel() {
+    document.getElementById('image-preview-overlay')?.classList.add('hidden');
     document.getElementById('film-overlay')?.classList.add('hidden');
 
-    /* chiude anche il vecchio pannello, nel caso fosse aperto */
     document.getElementById('detail-panel')?.classList.remove('open');
 }
 
@@ -148,6 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('close-panel')?.addEventListener('click', closePanel);
     document.getElementById('compass-btn')?.addEventListener('click', randomJourney);
     document.getElementById('search-input')?.addEventListener('input', handleSearch);
+
+    document.getElementById('overlay-main-img')?.addEventListener('click', openImagePreview);
+    document.getElementById('image-preview-overlay')?.addEventListener('click', closeImagePreview);
 
     document.getElementById('film-overlay')?.addEventListener('click', (event) => {
         if (

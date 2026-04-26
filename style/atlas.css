@@ -194,15 +194,12 @@
 /* pannelli base */
 .film-side-card,
 .film-main-card {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
     background-color: #0f1a1c;
-
     box-shadow:
         inset 0 0 80px rgba(0,0,0,0.7),
         0 10px 30px rgba(0,0,0,0.4);
+    overflow: hidden;
+    cursor: pointer;
 }
 
 /* rettangolo sinistro attaccato al lato */
@@ -245,10 +242,7 @@
 .film-main-card {
     width: 100%;
     height: 100%;
-}
 
-/* immagine solo nel rettangolo sopra */
-.film-main-card {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -291,6 +285,56 @@
     display: none;
 }
 
+/* =========================
+   🖼️ PREVIEW GRANDE IMMAGINE
+========================= */
+
+.image-preview-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(35, 38, 40, 0.62);
+    backdrop-filter: blur(7px);
+
+    animation: previewFadeIn 0.25s ease forwards;
+    cursor: pointer;
+}
+
+.image-preview-overlay.hidden {
+    display: none;
+}
+
+.image-preview-box {
+    width: 90vw;
+    height: 90vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-preview-box img {
+    max-width: 100%;
+    max-height: 100%;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.5);
+
+    animation: previewZoomIn 0.35s ease forwards;
+}
+
 /* animazioni pannelli */
 @keyframes slideFromTop {
     from {
@@ -325,6 +369,26 @@
     }
 }
 
+@keyframes previewFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes previewZoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.86);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 /* responsive */
 @media screen and (max-width: 900px) {
     .film-left-card,
@@ -344,5 +408,10 @@
 
     .film-title-area h1 {
         font-size: 1.8rem;
+    }
+
+    .image-preview-box {
+        width: 92vw;
+        height: 72vh;
     }
 }
