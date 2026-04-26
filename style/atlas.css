@@ -7,7 +7,6 @@
     height: 100%;
 
     background: rgba(250, 247, 242, 0.98);
-
     box-shadow: -10px 0 30px rgba(0,0,0,0.15);
 
     transform: translateX(100%);
@@ -33,7 +32,6 @@
 
     border-radius: 50%;
     background: rgba(255, 250, 245, 0.95);
-
     border: 2px solid #9db8a8;
 
     cursor: pointer;
@@ -226,6 +224,39 @@
     animation: slideFromRight 0.55s ease forwards;
 }
 
+/* INFO dentro rettangolo sinistro */
+.info-card-label {
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 40%),
+        linear-gradient(145deg, #476453, #263c35);
+
+    border: 2px solid rgba(232, 221, 181, 0.35);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff4d6;
+    font-family: 'Caveat', cursive;
+    font-size: 3.4rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.info-card-label i {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    color: #c8d59b;
+}
+
+.film-left-card:hover .info-card-label {
+    filter: brightness(1.08);
+}
+
 /* rettangolo centrale in alto */
 .film-center-area {
     position: absolute;
@@ -283,6 +314,218 @@
 .film-meta-row,
 .overlay-more-btn {
     display: none;
+}
+
+/* =========================
+   📖 PAGINA INFO DIARIO
+========================= */
+
+.film-info-page {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+
+    background: rgba(17, 25, 27, 0.68);
+    backdrop-filter: blur(8px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: previewFadeIn 0.25s ease forwards;
+}
+
+.film-info-page.hidden {
+    display: none;
+}
+
+.film-info-book {
+    position: relative;
+
+    width: min(88vw, 1180px);
+    height: min(84vh, 720px);
+
+    background:
+        linear-gradient(90deg, rgba(98, 78, 51, 0.18) 0%, transparent 6%, transparent 94%, rgba(98, 78, 51, 0.18) 100%),
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.55), transparent 32%),
+        #f4e7c8;
+
+    border-radius: 22px;
+    border: 2px solid rgba(99, 83, 55, 0.4);
+
+    box-shadow:
+        0 28px 70px rgba(0,0,0,0.55),
+        inset 0 0 60px rgba(98, 75, 43, 0.18);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    animation: bookOpen 0.42s ease forwards;
+}
+
+.film-info-book::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(93, 113, 80, 0.35);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.film-info-close {
+    position: sticky;
+    top: 18px;
+    float: right;
+
+    margin: 18px 20px 0 0;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+    border: 2px solid rgba(93, 113, 80, 0.6);
+
+    background: #536a4f;
+    color: #fff6dc;
+
+    font-size: 34px;
+    line-height: 42px;
+
+    cursor: pointer;
+    z-index: 4;
+
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+.book-left-decoration {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 92px;
+    min-height: 100%;
+
+    background:
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,0.16), transparent 30%),
+        linear-gradient(180deg, #49674d, #263c35);
+
+    border-right: 2px solid rgba(94, 74, 47, 0.35);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-left-decoration span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+
+    font-family: 'Caveat', cursive;
+    font-size: 3rem;
+    color: #fff4d6;
+    letter-spacing: 6px;
+}
+
+.book-content {
+    padding: 55px 70px 55px 145px;
+}
+
+.book-header p {
+    font-family: 'Quicksand', sans-serif;
+    color: #536a4f;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    margin: 0 0 8px 0;
+}
+
+.book-header h2 {
+    font-family: 'Caveat', cursive;
+    color: #2d4037;
+    font-size: 3.4rem;
+    margin: 0 0 26px 0;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 38px;
+}
+
+.book-description {
+    background: rgba(255, 248, 226, 0.45);
+    border-radius: 18px;
+    border: 1px solid rgba(93, 113, 80, 0.22);
+    padding: 24px;
+}
+
+.book-description h3 {
+    margin: 0 0 14px 0;
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: #536a4f;
+}
+
+.book-description p {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: #3d4d45;
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+.book-image {
+    border-radius: 18px;
+    overflow: hidden;
+    height: 285px;
+    background: rgba(54, 73, 62, 0.18);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+
+.book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-details {
+    grid-column: 1 / 3;
+
+    background: rgba(255, 248, 226, 0.38);
+    border-radius: 18px;
+    border: 1px solid rgba(93, 113, 80, 0.22);
+
+    padding: 18px 26px;
+}
+
+.book-detail-row {
+    display: grid;
+    grid-template-columns: 42px 1fr 1.2fr;
+    align-items: center;
+
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(93, 113, 80, 0.25);
+
+    font-family: 'Quicksand', sans-serif;
+    color: #40534a;
+}
+
+.book-detail-row:last-child {
+    border-bottom: none;
+}
+
+.book-detail-row i {
+    color: #6f895f;
+    font-size: 1.3rem;
+}
+
+.book-detail-row span {
+    font-weight: 700;
+}
+
+.book-detail-row strong {
+    font-family: 'Caveat', cursive;
+    font-size: 1.7rem;
+    color: #2d4037;
 }
 
 /* =========================
@@ -389,6 +632,17 @@
     }
 }
 
+@keyframes bookOpen {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 /* responsive */
 @media screen and (max-width: 900px) {
     .film-left-card,
@@ -413,5 +667,122 @@
     .image-preview-box {
         width: 92vw;
         height: 72vh;
+    }
+
+    .film-info-book {
+        width: 92vw;
+        height: 84vh;
+    }
+
+    .book-left-decoration {
+        display: none;
+    }
+
+    .book-content {
+        padding: 58px 24px 35px 24px;
+    }
+
+    .book-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .book-details {
+        grid-column: auto;
+    }
+
+    .book-detail-row {
+        grid-template-columns: 32px 1fr;
+        gap: 8px;
+    }
+
+    .book-detail-row strong {
+        grid-column: 2;
+    }
+
+    .book-header h2 {
+        font-size: 2.4rem;
+    }
+}
+
+
+/* nasconde scrollbar ma mantiene scroll */
+.film-info-page {
+    overflow-y: scroll;
+
+    /* Firefox */
+    scrollbar-width: none;
+
+    /* IE / Edge vecchi */
+    -ms-overflow-style: none;
+}
+
+/* Chrome, Safari */
+.film-info-page::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* nasconde scrollbar del libro info ma mantiene scroll */
+.film-info-book {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.film-info-book::-webkit-scrollbar {
+    display: none;
+}
+
+/* =========================
+   🌫️ ANIMAZIONE NEBBIA INFO
+========================= */
+
+.film-info-page:not(.hidden) .film-info-book {
+    animation: bookOpenFog 0.75s ease forwards;
+}
+
+.film-info-page:not(.hidden) .book-content {
+    animation: fogRevealContent 1.1s ease forwards;
+}
+
+.film-info-page:not(.hidden) .book-left-decoration {
+    animation: fogRevealSide 0.9s ease forwards;
+}
+
+@keyframes bookOpenFog {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.94);
+        filter: blur(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes fogRevealContent {
+    from {
+        opacity: 0;
+        transform: translateY(-35px);
+        filter: blur(18px);
+        clip-path: inset(0 0 100% 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes fogRevealSide {
+    from {
+        opacity: 0;
+        filter: blur(16px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
     }
 }

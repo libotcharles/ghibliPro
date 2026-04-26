@@ -1,4 +1,5 @@
 window.UI = {};
+window.currentFilm = null;
 
 /* =========================
    🎬 OPEN OVERLAY FILM
@@ -7,16 +8,18 @@ window.UI.openPanel = function (film) {
     const overlay = document.getElementById('film-overlay');
     if (!overlay || !film) return;
 
+    window.currentFilm = film;
+
     overlay.classList.remove('hidden');
 
     document.getElementById('overlay-title').textContent = film.title || 'Titolo del film';
-    document.getElementById('overlay-year').textContent = film.year || '-';
+    document.getElementById('overlay-year').textContent = film.year || film.release_date || '-';
     document.getElementById('overlay-director').textContent = film.director || '-';
-    document.getElementById('overlay-rating').textContent = film.character || '-';
+    document.getElementById('overlay-rating').textContent = film.rt_score || film.character || '-';
 
     const duration = document.getElementById('overlay-duration');
     if (duration) {
-        duration.textContent = film.duration || '-';
+        duration.textContent = film.duration || film.running_time || '-';
     }
 
     const mainImg = document.getElementById('overlay-main-img');
@@ -49,7 +52,51 @@ window.UI.openPanel = function (film) {
     if (rightImg) {
         rightImg.style.backgroundImage = 'none';
     }
+
+    closeInfoPage();
 };
+
+/* =========================
+   📖 OPEN INFO PAGE
+========================= */
+function openInfoPage(event) {
+    if (event) event.stopPropagation();
+
+    const film = window.currentFilm;
+    const infoPage = document.getElementById('film-info-page');
+
+    if (!film || !infoPage) return;
+
+    const imageUrl = film.filmImage || '';
+
+    document.getElementById('info-title').textContent = film.title || 'Titolo del film';
+    document.getElementById('info-description').textContent = film.description || film.inspiration || '-';
+    document.getElementById('info-director').textContent = film.director || '-';
+    document.getElementById('info-producer').textContent = film.producer || '-';
+    document.getElementById('info-release-date').textContent = film.release_date || film.year || '-';
+    document.getElementById('info-running-time').textContent = film.running_time
+        ? `${film.running_time} min`
+        : (film.duration || '-');
+    document.getElementById('info-rt-score').textContent = film.rt_score
+        ? `${film.rt_score}%`
+        : (film.rating || '-');
+
+    const infoImage = document.getElementById('info-image');
+    if (infoImage) {
+        infoImage.src = imageUrl || '';
+    }
+
+    infoPage.classList.remove('hidden');
+}
+
+/* =========================
+   📖 CLOSE INFO PAGE
+========================= */
+function closeInfoPage(event) {
+    if (event) event.stopPropagation();
+
+    document.getElementById('film-info-page')?.classList.add('hidden');
+}
 
 /* =========================
    🖼️ OPEN IMAGE PREVIEW
@@ -79,6 +126,7 @@ function closeImagePreview(event) {
 ========================= */
 function closePanel() {
     document.getElementById('image-preview-overlay')?.classList.add('hidden');
+    document.getElementById('film-info-page')?.classList.add('hidden');
     document.getElementById('film-overlay')?.classList.add('hidden');
 
     document.getElementById('detail-panel')?.classList.remove('open');
@@ -182,6 +230,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('overlay-main-img')?.addEventListener('click', openImagePreview);
     document.getElementById('image-preview-overlay')?.addEventListener('click', closeImagePreview);
+
+    document.getElementById('open-info-page')?.addEventListener('click', openInfoPage);
+    document.getElementById('film-info-close')?.addEventListener('click', closeInfoPage);
+
+    document.getElementById('film-info-page')?.addEventListener('click', (event) => {
+        if (event.target.id === 'film-info-page') {
+            closeInfoPage(event);
+        }
+    });
 
     document.getElementById('film-overlay')?.addEventListener('click', (event) => {
         if (
