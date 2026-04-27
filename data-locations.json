@@ -68,7 +68,8 @@
       "realImage": "assets/img/locations/adriatic-real.jpg",
       "filmImage": "assets/img/locations/porco-rosso-coast.jpg",
       "marker": "🛩️",
-      "character": "Porco Rosso"
+      "character": "Porco Rosso",
+      "glowSize": 55
     },
     {
       "filmId": "ebf8910f-8d9f-45da-b091-b7b16ea11b46",

@@ -262,3 +262,25 @@
         height: 46px;
     }
 }
+
+
+/* =========================
+   ✨ GLOW CIRCLE MARKER
+========================= */
+
+.ghibli-glow-circle {
+    animation: ghibliGlowPulse 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(157, 255, 181, 0.75));
+}
+
+@keyframes ghibliGlowPulse {
+    0%, 100% {
+        opacity: 0.55;
+        stroke-width: 2;
+    }
+
+    50% {
+        opacity: 1;
+        stroke-width: 4;
+    }
+}

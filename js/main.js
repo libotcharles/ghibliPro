@@ -1,5 +1,6 @@
 window.activeMarkers = [];
 window.markerClusterGroup = null;
+window.activeGlowCircle = null;
 
 /* =========================
    🎯 CREA ICONA MARKER
@@ -23,9 +24,33 @@ function getMarkerContentElement(marker) {
 }
 
 /* =========================
+   ✨ GLOW HOVER
+========================= */
+function showGlowCircle(film) {
+    if (!window.map || !film) return;
+
+    hideGlowCircle();
+
+    document.getElementById('atlas-page')?.classList.add('map-hover-active');
+
+    window.activeGlowCircle = null;
+}
+
+function hideGlowCircle() {
+    document.getElementById('atlas-page')?.classList.remove('map-hover-active');
+
+    if (window.map && window.activeGlowCircle) {
+        window.map.removeLayer(window.activeGlowCircle);
+        window.activeGlowCircle = null;
+    }
+}
+
+/* =========================
    🧼 PULISCI MARKER
 ========================= */
 function clearMarkers() {
+    hideGlowCircle();
+
     if (window.markerClusterGroup) {
         window.markerClusterGroup.clearLayers();
     }
@@ -92,8 +117,24 @@ function loadMarkers(films) {
             title: film.title || 'Film'
         });
 
+        marker.on('mouseover', () => {
+            const el = getMarkerContentElement(marker);
+            if (el) el.classList.add('marker-hovered');
+
+            showGlowCircle(film);
+        });
+
+        marker.on('mouseout', () => {
+            const el = getMarkerContentElement(marker);
+            if (el) el.classList.remove('marker-hovered');
+
+            hideGlowCircle();
+        });
+
         marker.on('click', (e) => {
             e.originalEvent?.stopPropagation?.();
+
+            hideGlowCircle();
 
             const iconElement = getMarkerContentElement(marker);
             if (iconElement) {
@@ -144,6 +185,8 @@ function fitMapToMarkers(padding = [40, 40]) {
 ========================= */
 function focusOnFilm(film) {
     if (!window.map || !film) return;
+
+    hideGlowCircle();
 
     window.map.flyTo([film.lat, film.lng], 7, {
         animate: true,
