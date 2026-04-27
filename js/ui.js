@@ -1,9 +1,27 @@
 window.UI = {};
 window.currentFilm = null;
 
-/* =========================
-   🎬 OPEN OVERLAY FILM
-========================= */
+function typeText(element, text, speed = 18) {
+    if (!element) return;
+
+    text = String(text || '');
+
+    element.textContent = '';
+    element.classList.add('typing-text');
+
+    let index = 0;
+
+    const interval = setInterval(() => {
+        element.textContent += text.charAt(index);
+        index++;
+
+        if (index >= text.length) {
+            clearInterval(interval);
+            element.classList.remove('typing-text');
+        }
+    }, speed);
+}
+
 window.UI.openPanel = function (film) {
     const overlay = document.getElementById('film-overlay');
     if (!overlay || !film) return;
@@ -12,23 +30,25 @@ window.UI.openPanel = function (film) {
 
     overlay.classList.remove('hidden');
 
-    document.getElementById('overlay-title').textContent = film.title || 'Titolo del film';
-    document.getElementById('overlay-year').textContent = film.year || film.release_date || '-';
-    document.getElementById('overlay-director').textContent = film.director || '-';
-    document.getElementById('overlay-rating').textContent = film.rt_score || film.character || '-';
+    const imageUrl = film.filmImage || '';
 
-    const duration = document.getElementById('overlay-duration');
-    if (duration) {
-        duration.textContent = film.duration || film.running_time || '-';
-    }
+    document.getElementById('overlay-title').textContent = film.title || 'Titolo del film';
+
+    const overlayYear = document.getElementById('overlay-year');
+    const overlayDirector = document.getElementById('overlay-director');
+    const overlayRating = document.getElementById('overlay-rating');
+    const overlayDuration = document.getElementById('overlay-duration');
+
+    if (overlayYear) overlayYear.textContent = film.year || film.release_date || '-';
+    if (overlayDirector) overlayDirector.textContent = film.director || '-';
+    if (overlayRating) overlayRating.textContent = film.rt_score || film.character || '-';
+    if (overlayDuration) overlayDuration.textContent = film.duration || film.running_time || '-';
 
     const mainImg = document.getElementById('overlay-main-img');
     const leftImg = document.getElementById('overlay-left-img');
     const rightImg = document.getElementById('overlay-right-img');
     const previewImg = document.getElementById('preview-img');
     const previewOverlay = document.getElementById('image-preview-overlay');
-
-    const imageUrl = film.filmImage || '';
 
     if (mainImg) {
         mainImg.style.backgroundImage = imageUrl ? `url(${imageUrl})` : 'none';
@@ -45,20 +65,12 @@ window.UI.openPanel = function (film) {
         previewOverlay.classList.add('hidden');
     }
 
-    if (leftImg) {
-        leftImg.style.backgroundImage = 'none';
-    }
-
-    if (rightImg) {
-        rightImg.style.backgroundImage = 'none';
-    }
+    if (leftImg) leftImg.style.backgroundImage = 'none';
+    if (rightImg) rightImg.style.backgroundImage = 'none';
 
     closeInfoPage();
 };
 
-/* =========================
-   📖 OPEN INFO PAGE
-========================= */
 function openInfoPage(event) {
     if (event) event.stopPropagation();
 
@@ -69,17 +81,30 @@ function openInfoPage(event) {
 
     const imageUrl = film.filmImage || '';
 
-    document.getElementById('info-title').textContent = film.title || 'Titolo del film';
-    document.getElementById('info-description').textContent = film.description || film.inspiration || '-';
-    document.getElementById('info-director').textContent = film.director || '-';
-    document.getElementById('info-producer').textContent = film.producer || '-';
-    document.getElementById('info-release-date').textContent = film.release_date || film.year || '-';
-    document.getElementById('info-running-time').textContent = film.running_time
-        ? `${film.running_time} min`
-        : (film.duration || '-');
-    document.getElementById('info-rt-score').textContent = film.rt_score
-        ? `${film.rt_score}%`
-        : (film.rating || '-');
+    const title = film.title || 'Titolo del film';
+    const description = film.description || film.inspiration || '-';
+    const director = film.director || '-';
+    const producer = film.producer || '-';
+    const releaseDate = film.release_date || film.year || '-';
+    const runningTime = film.running_time ? `${film.running_time} min` : (film.duration || '-');
+    const rtScore = film.rt_score ? `${film.rt_score}%` : (film.rating || '-');
+
+    const titleEl = document.getElementById('info-title');
+    const descriptionEl = document.getElementById('info-description');
+    const directorEl = document.getElementById('info-director');
+    const producerEl = document.getElementById('info-producer');
+    const releaseDateEl = document.getElementById('info-release-date');
+    const runningTimeEl = document.getElementById('info-running-time');
+    const rtScoreEl = document.getElementById('info-rt-score');
+
+    if (titleEl) titleEl.textContent = title;
+
+    if (descriptionEl) descriptionEl.textContent = '';
+    if (directorEl) directorEl.textContent = '';
+    if (producerEl) producerEl.textContent = '';
+    if (releaseDateEl) releaseDateEl.textContent = '';
+    if (runningTimeEl) runningTimeEl.textContent = '';
+    if (rtScoreEl) rtScoreEl.textContent = '';
 
     const infoImage = document.getElementById('info-image');
     if (infoImage) {
@@ -87,20 +112,49 @@ function openInfoPage(event) {
     }
 
     infoPage.classList.remove('hidden');
+
+    infoPage.classList.remove('info-animate');
+    void infoPage.offsetWidth;
+    infoPage.classList.add('info-animate');
+
+    const speed = 14;
+    const descriptionDuration = description.length * speed;
+
+    setTimeout(() => {
+        typeText(descriptionEl, description, speed);
+    }, 350);
+
+    setTimeout(() => {
+        typeText(directorEl, director, 22);
+    }, 350 + descriptionDuration + 200);
+
+    setTimeout(() => {
+        typeText(producerEl, producer, 22);
+    }, 350 + descriptionDuration + 350);
+
+    setTimeout(() => {
+        typeText(releaseDateEl, releaseDate, 22);
+    }, 350 + descriptionDuration + 500);
+
+    setTimeout(() => {
+        typeText(runningTimeEl, runningTime, 22);
+    }, 350 + descriptionDuration + 650);
+
+    setTimeout(() => {
+        typeText(rtScoreEl, rtScore, 22);
+    }, 350 + descriptionDuration + 800);
 }
 
-/* =========================
-   📖 CLOSE INFO PAGE
-========================= */
 function closeInfoPage(event) {
     if (event) event.stopPropagation();
 
-    document.getElementById('film-info-page')?.classList.add('hidden');
+    const infoPage = document.getElementById('film-info-page');
+    if (infoPage) {
+        infoPage.classList.add('hidden');
+        infoPage.classList.remove('info-animate');
+    }
 }
 
-/* =========================
-   🖼️ OPEN IMAGE PREVIEW
-========================= */
 function openImagePreview(event) {
     event.stopPropagation();
 
@@ -110,31 +164,19 @@ function openImagePreview(event) {
     previewOverlay.classList.remove('hidden');
 }
 
-/* =========================
-   🖼️ CLOSE IMAGE PREVIEW
-========================= */
 function closeImagePreview(event) {
-    if (event) {
-        event.stopPropagation();
-    }
+    if (event) event.stopPropagation();
 
     document.getElementById('image-preview-overlay')?.classList.add('hidden');
 }
 
-/* =========================
-   ❌ CLOSE OVERLAY
-========================= */
 function closePanel() {
     document.getElementById('image-preview-overlay')?.classList.add('hidden');
     document.getElementById('film-info-page')?.classList.add('hidden');
     document.getElementById('film-overlay')?.classList.add('hidden');
-
     document.getElementById('detail-panel')?.classList.remove('open');
 }
 
-/* =========================
-   🎲 RANDOM JOURNEY
-========================= */
 function randomJourney() {
     const films = window.displayedFilms;
     if (!films?.length) return;
@@ -143,9 +185,6 @@ function randomJourney() {
     focusOnFilm(film);
 }
 
-/* =========================
-   🔍 SEARCH FILMS
-========================= */
 function handleSearch(event) {
     const query = event.target.value.trim().toLowerCase();
 
@@ -179,9 +218,6 @@ function handleSearch(event) {
     }
 }
 
-/* =========================
-   ▶️ START APP
-========================= */
 function startAtlas() {
     const landing = document.getElementById('landing-page');
     const atlas = document.getElementById('atlas-page');
@@ -214,9 +250,6 @@ function startAtlas() {
     }, 500);
 }
 
-/* =========================
-   ⚙️ INIT UI
-========================= */
 document.addEventListener('DOMContentLoaded', () => {
     if (Array.isArray(window.filmsData) && !Array.isArray(window.displayedFilms)) {
         window.displayedFilms = [...window.filmsData];

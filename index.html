@@ -43,19 +43,29 @@
 
     <!-- 🌍 ATLAS -->
     <section id="atlas-page" class="hidden">
+        <!-- 🗺️ MAPPA -->
         <div id="atlas-map"></div>
 
+        <!-- 🌬️ TITOLO MAPPA -->
+        <div class="atlas-map-title">
+            <span>WELCOME TO THE</span>
+            <h1>GHIBLI WORLD</h1>
+        </div>
+
+        <!-- 🔍 SEARCH -->
         <div class="atlas-search-bar">
             <i class="fas fa-search"></i>
             <input type="text" id="search-input" placeholder="Cerca film o regista...">
         </div>
 
+        <!-- 🎛️ MAP TOOLS -->
         <div class="map-tools">
             <button id="compass-btn" class="map-tool-btn compass-btn" title="Viaggio casuale">
                 🧭
             </button>
         </div>
 
+        <!-- 📂 PANEL DETTAGLIO -->
         <div class="atlas-detail-panel" id="detail-panel">
             <button id="close-panel" class="close-panel">×</button>
 
@@ -79,7 +89,7 @@
             </div>
         </div>
 
-        <!-- 🎬 NUOVO OVERLAY FILM -->
+        <!-- 🎬 OVERLAY FILM -->
         <div id="film-overlay" class="film-overlay hidden">
             <div class="film-overlay-backdrop"></div>
 
@@ -99,24 +109,6 @@
 
                     <div class="film-title-area">
                         <h1 id="overlay-title">Titolo del film</h1>
-
-                        <div class="film-divider">
-                            <span></span>
-                            <i class="fas fa-leaf"></i>
-                            <span></span>
-                        </div>
-
-                        <div class="film-meta-row">
-                            <p><i class="fas fa-calendar"></i> <span id="overlay-year">Anno</span></p>
-                            <p><i class="fas fa-clock"></i> <span id="overlay-duration">Durata</span></p>
-                            <p><i class="fas fa-chair"></i> <span id="overlay-director">Regia</span></p>
-                            <p><i class="fas fa-star"></i> <span id="overlay-rating">Voto</span></p>
-                        </div>
-
-                        <button id="overlay-more-btn" class="overlay-more-btn">
-                            <i class="fas fa-circle-info"></i>
-                            SCOPRI DI PIÙ
-                        </button>
                     </div>
                 </div>
 
@@ -125,7 +117,7 @@
                 </div>
             </div>
 
-            <!-- 📖 PAGINA INFO DIARIO -->
+            <!-- 📖 INFO PAGE -->
             <div id="film-info-page" class="film-info-page hidden">
                 <div class="film-info-book">
                     <button id="film-info-close" class="film-info-close">×</button>
@@ -137,48 +129,43 @@
                     <div class="book-content">
                         <div class="book-header">
                             <p>GHIBLI WORLD ATLAS</p>
-                            <h2 id="info-title">Titolo del film</h2>
+                            <h2 id="info-title">Titolo</h2>
                         </div>
 
                         <div class="book-grid">
                             <div class="book-description">
-                                <h3><i class="fas fa-leaf"></i> Trama</h3>
-                                <p id="info-description">Descrizione del film...</p>
+                                <h3>Trama</h3>
+                                <p id="info-description"></p>
                             </div>
 
                             <div class="book-image">
-                                <img id="info-image" src="" alt="Immagine film">
+                                <img id="info-image" src="">
                             </div>
 
                             <div class="book-details">
                                 <div class="book-detail-row">
-                                    <i class="fas fa-chair"></i>
                                     <span>Regia</span>
-                                    <strong id="info-director">-</strong>
+                                    <strong id="info-director"></strong>
                                 </div>
 
                                 <div class="book-detail-row">
-                                    <i class="fas fa-video"></i>
                                     <span>Produttore</span>
-                                    <strong id="info-producer">-</strong>
+                                    <strong id="info-producer"></strong>
                                 </div>
 
                                 <div class="book-detail-row">
-                                    <i class="fas fa-calendar"></i>
                                     <span>Anno</span>
-                                    <strong id="info-release-date">-</strong>
+                                    <strong id="info-release-date"></strong>
                                 </div>
 
                                 <div class="book-detail-row">
-                                    <i class="fas fa-clock"></i>
                                     <span>Durata</span>
-                                    <strong id="info-running-time">-</strong>
+                                    <strong id="info-running-time"></strong>
                                 </div>
 
                                 <div class="book-detail-row">
-                                    <i class="fas fa-star"></i>
-                                    <span>Rotten Tomatoes</span>
-                                    <strong id="info-rt-score">-</strong>
+                                    <span>RT Score</span>
+                                    <strong id="info-rt-score"></strong>
                                 </div>
                             </div>
                         </div>
@@ -186,15 +173,16 @@
                 </div>
             </div>
 
-            <!-- 🖼️ PREVIEW GRANDE IMMAGINE -->
+            <!-- 🖼️ IMAGE PREVIEW -->
             <div id="image-preview-overlay" class="image-preview-overlay hidden">
                 <div class="image-preview-box">
-                    <img id="preview-img" src="" alt="Anteprima immagine film">
+                    <img id="preview-img" src="">
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
