@@ -499,14 +499,45 @@
 
 .book-detail-row {
     display: grid;
-    grid-template-columns: 42px 1fr 1.2fr;
+    grid-template-columns: 150px 1fr;
     align-items: center;
+
+    column-gap: 40px;
 
     padding: 14px 0;
     border-bottom: 1px solid rgba(93, 113, 80, 0.25);
 
     font-family: 'Quicksand', sans-serif;
     color: #40534a;
+}
+
+.book-detail-row i {
+    display: none;
+}
+
+.book-detail-row span {
+    grid-column: 1;
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+.book-detail-row strong {
+    grid-column: 2;
+    display: block;
+
+    padding-left: 35px;
+    white-space: nowrap;
+
+    font-family: 'Caveat', cursive;
+    font-size: 1.7rem;
+    color: #2d4037;
+}
+
+
+.book-detail-row strong::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
 }
 
 .book-detail-row:last-child {
